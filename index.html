@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convivencia 6° Básico LVPS</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #dbeafe, #fef3c7, #fce7f3);
+      color: #1f2937;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.15);
+      margin-bottom: 20px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #1e40af;
+      margin-bottom: 16px;
+    }
+
+    p {
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .stat small {
+      color: #64748b;
+      font-weight: bold;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      margin-top: 8px;
+      color: #0f172a;
+    }
+
+    .login-box {
+      max-width: 520px;
+      margin: 40px auto;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid #cbd5e1;
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    button {
+      border: none;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+
+    .btn-primary { background: #2563eb; color: white; width: 100%; }
+    .btn-green { background: #16a34a; color: white; }
+    .btn-red { background: #dc2626; color: white; }
+    .btn-orange { background: #ea580c; color: white; }
+    .btn-blue { background: #2563eb; color: white; }
+    .btn-gray { background: #e5e7eb; color: #111827; }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .action-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      min-height: 58px;
+    }
+
+    .flight-card {
+      background: linear-gradient(90deg, #bae6fd, #cffafe, #fde68a);
+      border-radius: 26px;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sky {
+      position: relative;
+      height: 210px;
+      border-radius: 22px;
+      background: linear-gradient(#7dd3fc, #e0f2fe 70%, #86efac);
+      overflow: hidden;
+      border: 4px solid rgba(255, 255, 255, 0.8);
+      margin-top: 16px;
+    }
+
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 50px;
+      opacity: 0.85;
+    }
+
+    .cloud::before, .cloud::after {
+      content: "";
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .cloud.one {
+      width: 95px;
+      height: 34px;
+      left: 8%;
+      top: 28px;
+    }
+
+    .cloud.one::before {
+      width: 45px;
+      height: 45px;
+      left: 15px;
+      top: -20px;
+    }
+
+    .cloud.one::after {
+      width: 35px;
+      height: 35px;
+      left: 55px;
+      top: -12px;
+    }
+
+    .cloud.two {
+      width: 120px;
+      height: 38px;
+      left: 45%;
+      top: 50px;
+    }
+
+    .cloud.two::before {
+      width: 50px;
+      height: 50px;
+      left: 18px;
+      top: -24px;
+    }
+
+    .cloud.two::after {
+      width: 42px;
+      height: 42px;
+      left: 70px;
+      top: -17px;
+    }
+
+    .school {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      font-size: 42px;
+    }
+
+    .cinema {
+      position: absolute;
+      right: 18px;
+      top: 70px;
+      background: white;
+      border-radius: 18px;
+      padding: 12px 16px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border: 4px solid #fbbf24;
+      z-index: 3;
+    }
+
+    .cinema .icons {
+      font-size: 34px;
+    }
+
+    .plane {
+      position: absolute;
+      top: 88px;
+      left: 0%;
+      font-size: 46px;
+      transition: left 0.8s ease;
+      animation: float 2s infinite ease-in-out;
+      z-index: 4;
+      filter: drop-shadow(0 6px 4px rgba(0,0,0,0.2));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(2deg); }
+      50% { transform: translateY(-8px) rotate(-2deg); }
+    }
+
+    .progress-wrap {
+      background: #e5e7eb;
+      height: 24px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 18px;
+      border: 2px solid white;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      border-radius: 999px;
+      transition: width 0.8s ease;
+    }
+
+    .history {
+      max-height: 420px;
+      overflow: auto;
+      display: grid;
+      gap: 10px;
+    }
+
+    .history-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .positive { color: #15803d; font-weight: bold; }
+    .negative { color: #b91c1c; font-weight: bold; }
+
+    .rules ul {
+      padding-left: 18px;
+      line-height: 1.8;
+    }
+
+    .error {
+      color: #dc2626;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .help {
+      background: #eff6ff;
+      border-left: 5px solid #2563eb;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 850px) {
+      .grid, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .plane {
+        font-size: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section id="loginView" class="login-box card">
+      <h1>Convivencia 6° Básico LVPS</h1>
+      <p>Aplicación educativa para mejorar el comportamiento y la convivencia del curso.</p>
+
+      <div class="help">
+        <strong>Accesos de prueba:</strong><br>
+        docente1@lvps.cl / 123456<br>
+        docente2@lvps.cl / 123456<br>
+        inspector@lvps.cl / 123456
+      </div>
+
+      <form id="loginForm" style="margin-top: 20px;">
+        <label for="email">Correo docente</label>
+        <input id="email" type="email" value="docente1@lvps.cl" required />
+
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" value="123456" required />
+
+        <button class="btn-primary" type="submit">Ingresar</button>
+        <p id="loginError" class="error"></p>
+      </form>
+    </section>
+
+    <section id="appView" class="hidden">
+      <div class="card header">
+        <div>
+          <h1>Ruta del 6° Básico hacia el Cine</h1>
+          <p><strong>Liceo T.P. Violeta Parra Sandoval</strong></p>
+          <p id="teacherInfo"></p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <span class="badge">Meta: 10.000 créditos</span>
+          <button id="logoutBtn" class="btn-gray">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="stat">
+          <small>Curso beneficiado</small>
+          <strong style="font-size: 20px;">6° Básico LVPS</strong>
+        </div>
+        <div class="stat">
+          <small>Créditos actuales</small>
+          <strong id="creditsText">0</strong>
+        </div>
+        <div class="stat">
+          <small>Faltan para la meta</small>
+          <strong id="remainingText">10.000</strong>
+        </div>
+      </div>
+
+      <div class="card flight-card">
+        <div class="header">
+          <div>
+            <h2>Progreso del viaje</h2>
+            <p id="statusText">Preparando despegue</p>
+          </div>
+          <span class="badge">🎬 Meta: salida al cine 🍿</span>
+        </div>
+
+        <div class="sky">
+          <div class="cloud one"></div>
+          <div class="cloud two"></div>
+          <div class="school">🏫</div>
+          <div id="plane" class="plane">✈️</div>
+          <div class="cinema">
+            <div class="icons">🎬🍿</div>
+            <strong>CINE</strong>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <p style="margin-top: 8px;"><span id="progressText">0%</span> de avance</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Acciones rápidas</h2>
+          <div class="actions">
+            <button class="btn-green action-btn" data-action="positive_individual" data-points="100">
+              <span>👤✅ Anotación positiva individual</span><strong>+100</strong>
+            </button>
+            <button class="btn-red action-btn" data-action="negative_individual" data-points="-100">
+              <span>👤⚠️ Anotación negativa individual</span><strong>-100</strong>
+            </button>
+            <button class="btn-green action-btn" data-action="positive_general" data-points="1000">
+              <span>👥⭐ Anotación positiva general</span><strong>+1000</strong>
+            </button>
+            <button class="btn-red action-btn" data-action="negative_general" data-points="-1000">
+              <span>👥⚠️ Anotación negativa general</span><strong>-1000</strong>
+            </button>
+            <button class="btn-red action-btn" data-action="student_suspension" data-points="-1000">
+              <span>🚫 Suspensión de estudiante</span><strong>-1000</strong>
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Puntaje variable del docente</h2>
+          <label for="variablePoints">Seleccionar puntaje</label>
+          <select id="variablePoints">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="60">60</option>
+            <option value="70">70</option>
+            <option value="80">80</option>
+            <option value="90">90</option>
+            <option value="100">100</option>
+          </select>
+          <div class="grid-2">
+            <button id="addVariableBtn" class="btn-blue">➕ Sumar</button>
+            <button id="subtractVariableBtn" class="btn-orange">➖ Restar</button>
+          </div>
+          <button id="resetBtn" class="btn-gray" style="width: 100%; margin-top: 14px;">🔄 Reiniciar créditos</button>
+
+          <div class="rules" style="margin-top: 20px;">
+            <h2>Reglas</h2>
+            <ul>
+              <li>Anotación positiva individual: +100</li>
+              <li>Anotación negativa individual: -100</li>
+              <li>Docente suma/resta: de 10 en 10 hasta 100</li>
+              <li>Anotación positiva general: +1000</li>
+              <li>Anotación negativa general: -1000</li>
+              <li>Suspensión de estudiante: -1000</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Historial reciente</h2>
+        <div id="historyList" class="history"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const GOAL = 10000;
+    const STORAGE_KEY = "convivencia-lvps-web-data-v1";
+    const SESSION_KEY = "convivencia-lvps-web-session-v1";
+
+    const teachers = [
+      { email: "docente1@lvps.cl", password: "123456", name: "Docente 1" },
+      { email: "docente2@lvps.cl", password: "123456", name: "Docente 2" },
+      { email: "inspector@lvps.cl", password: "123456", name: "Inspectoría" }
+    ];
+
+    let data = loadData();
+    let session = loadSession();
+
+    const loginView = document.getElementById("loginView");
+    const appView = document.getElementById("appView");
+    const loginForm = document.getElementById("loginForm");
+    const loginError = document.getElementById("loginError");
+    const teacherInfo = document.getElementById("teacherInfo");
+    const creditsText = document.getElementById("creditsText");
+    const remainingText = document.getElementById("remainingText");
+    const statusText = document.getElementById("statusText");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+    const plane = document.getElementById("plane");
+    const historyList = document.getElementById("historyList");
+    const variablePoints = document.getElementById("variablePoints");
+
+    function formatNumber(number) {
+      return new Intl.NumberFormat("es-CL").format(number);
+    }
+
+    function loadData() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return { credits: 0, history: [] };
+        const parsed = JSON.parse(saved);
+        return {
+          credits: typeof parsed.credits === "number" ? parsed.credits : 0,
+          history: Array.isArray(parsed.history) ? parsed.history : []
+        };
+      } catch (error) {
+        return { credits: 0, history: [] };
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function loadSession() {
+      try {
+        const saved = localStorage.getItem(SESSION_KEY);
+        return saved ? JSON.parse(saved) : null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function saveSession() {
+      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    }
+
+    function clearSession() {
+      localStorage.removeItem(SESSION_KEY);
+      session = null;
+    }
+
+    function getProgress() {
+      return Math.min(Math.max((data.credits / GOAL) * 100, 0), 100);
+    }
+
+    function getStatus() {
+      if (data.credits >= GOAL) return "¡Meta alcanzada! El curso llegó al cine 🎬🍿";
+      if (data.credits >= 7500) return "Muy cerca del cine";
+      if (data.credits >= 5000) return "Buen avance";
+      if (data.credits >= 2500) return "En pleno vuelo";
+      return "Preparando despegue";
+    }
+
+    function getActionLabel(action) {
+      const labels = {
+        positive_individual: "Anotación positiva individual",
+        negative_individual: "Anotación negativa individual",
+        positive_general: "Anotación positiva general",
+        negative_general: "Anotación negativa general",
+        student_suspension: "Suspensión de estudiante",
+        teacher_add: "Docente suma puntaje variable",
+        teacher_subtract: "Docente resta puntaje variable",
+        reset: "Reinicio manual de créditos"
+      };
+      return labels[action] || "Movimiento";
+    }
+
+    function addMovement(action, points) {
+      const nextCredits = Math.max(data.credits + points, 0);
+      data.credits = nextCredits;
+
+      data.history.unshift({
+        id: Date.now(),
+        action: getActionLabel(action),
+        points,
+        teacher: session.email,
+        date: new Date().toLocaleString("es-CL")
+      });
+
+      data.history = data.history.slice(0, 50);
+      saveData();
+      render();
+    }
+
+    function resetCredits() {
+      data.credits = 0;
+      data.history.unshift({
+        id: Date.now(),
+        action: "Reinicio manual de créditos",
+        points: 0,
+        teacher: session.email,
+        date: new Date().toLocaleString("es-CL")
+      });
+      saveData();
+      render();
+    }
+
+    function render() {
+      if (!session) {
+        loginView.classList.remove("hidden");
+        appView.classList.add("hidden");
+        return;
+      }
+
+      loginView.classList.add("hidden");
+      appView.classList.remove("hidden");
+
+      const progress = getProgress();
+      const remaining = Math.max(GOAL - data.credits, 0);
+
+      teacherInfo.textContent = `Sesión iniciada: ${session.email}`;
+      creditsText.textContent = formatNumber(data.credits);
+      remainingText.textContent = formatNumber(remaining);
+      statusText.textContent = getStatus();
+      progressBar.style.width = `${progress}%`;
+      progressText.textContent = `${Math.round(progress)}%`;
+      plane.style.left = `${Math.max(progress - 6, 0)}%`;
+
+      if (data.history.length === 0) {
+        historyList.innerHTML = `<div class="history-item">Aún no hay movimientos registrados.</div>`;
+        return;
+      }
+
+      historyList.innerHTML = data.history.map(item => {
+        const className = item.points >= 0 ? "positive" : "negative";
+        const sign = item.points > 0 ? "+" : "";
+        return `
+          <div class="history-item">
+            <div>
+              <strong>${item.action}</strong><br>
+              <small>${item.date} · ${item.teacher}</small>
+            </div>
+            <span class="${className}">${sign}${formatNumber(item.points)}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    loginForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      loginError.textContent = "";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const teacher = teachers.find(t => t.email === email && t.password === password);
+
+      if (!teacher) {
+        loginError.textContent = "Correo o contraseña incorrectos.";
+        return;
+      }
+
+      session = { email: teacher.email, name: teacher.name };
+      saveSession();
+      render();
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", function() {
+      clearSession();
+      render();
+    });
+
+    document.querySelectorAll(".action-btn").forEach(button => {
+      button.addEventListener("click", function() {
+        const action = this.dataset.action;
+        const points = Number(this.dataset.points);
+        addMovement(action, points);
+      });
+    });
+
+    document.getElementById("addVariableBtn").addEventListener("click", function() {
+      addMovement("teacher_add", Number(variablePoints.value));
+    });
+
+    document.getElementById("subtractVariableBtn").addEventListener("click", function() {
+      addMovement("teacher_subtract", -Number(variablePoints.value));
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", function() {
+      const confirmReset = confirm("¿Seguro que deseas reiniciar los créditos del curso?");
+      if (confirmReset) resetCredits();
+    });
+
+    render();
+  </script>
+</body>
+</html>
